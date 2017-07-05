@@ -1,0 +1,13 @@
+.dropDown {
+    width: 100px;
+}
+
+.errorMessage {
+    color: red;
+    margin-left: 1%;
+    font-size: 150%;
+}
+
+.tablehead {
+    font-weight: bold;
+}

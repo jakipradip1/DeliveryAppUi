@@ -1,0 +1,145 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <table>
+                <tr>
+                    <td>Start Dest*</td>
+                    <td>:</td>
+                    <td><select [(ngModel)]="routeModel.sDest" class="dropDown">
+                        <option *ngFor="let dest of destinations" [value]="dest">{{dest}}</option>
+  
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>End Dest*</td>
+                    <td>:</td>
+                    <td><select [(ngModel)]="routeModel.eDest" class="dropDown">
+                       <option *ngFor="let dest of destinations" [value]="dest">{{dest}}</option>
+  
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>Start Time*</td>
+                    <td>:</td>
+                    <td><select [(ngModel)]="routeModel.sTime" class="dropDown">
+                            <option *ngFor="let sTime of sTimes" [value]="sTime">{{sTime}}</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>Active Status*</td>
+                    <td>:</td>
+                    <td><select [(ngModel)]="routeModel.activeStatus" class="dropDown">
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>Estimate Time*</td>
+                    <td>:</td>
+                    <td><select [(ngModel)]="routeModel.eTime" class="dropDown">
+                            <option *ngFor="let eTime of eTimes" [value]="eTime">{{eTime}}</option>
+                        </select></td>
+                </tr>
+            </table>
+            <input type="button" value="Add" (click)="postRoute()" class="btn btn-primary">
+            <br>
+            <br>
+            <table *ngIf="edit">
+                <tr>
+                    <td>Id*</td>
+                    <td>:</td>
+                    <td><input type="text" [(ngModel)]="editedRoute.id" disabled></td>
+                </tr>
+                <tr>
+                    <td>Start Dest*</td>
+                    <td>:</td>
+                    <td><select [(ngModel)]="editedRoute.sDest" class="dropDown">
+                        <option *ngFor="let dest of destinations" [value]="dest">{{dest}}</option>
+  
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>End Dest*</td>
+                    <td>:</td>
+                    <td><select [(ngModel)]="editedRoute.eDest" class="dropDown">
+                       <option *ngFor="let dest of destinations" [value]="dest">{{dest}}</option>
+  
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>Start Time*</td>
+                    <td>:</td>
+                    <td><select [(ngModel)]="editedRoute.sTime" class="dropDown">
+                            <option *ngFor="let sTime of sTimes" [value]="sTime">{{sTime}}</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>Name*</td>
+                    <td>:</td>
+                    <td><input type="text" [(ngModel)]="editedRoute.name" disabled></td>
+                </tr>
+                <tr>
+                    <td>Active Status*</td>
+                    <td>:</td>
+                    <td><select [(ngModel)]="editedRoute.activeStatus" class="dropDown">
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>Estimate Time*</td>
+                    <td>:</td>
+                    <td><select [(ngModel)]="editedRoute.eTime" class="dropDown">
+                            <option *ngFor="let eTime of eTimes" [value]="eTime">{{eTime}}</option>
+                        </select></td>
+                </tr>
+            </table>
+            <input type="button" value="Save" (click)="putRoute()" *ngIf="edit" class="btn btn-primary">
+            <input type="button" value="Cancel" (click)="putCancel()" *ngIf="edit" class="btn btn-danger">
+        </div>
+
+        <div class="col-md-9">
+            Search By :
+            <select [(ngModel)]="searchBy">
+                <option value="anyField">All</option>
+                <option value="id">ID</option>
+                <option value="sDest">Start Dest</option>
+                <option value="name">Name</option>
+                <option value="eDest">End Dest</option>
+                <option value="activeStatus">Active Status</option>
+            </select>
+            <input type="text" placeholder="Search" [(ngModel)]="searchValue">
+            <input type="button" value="Search" (click)="searchVehicle()" class="btn btn-primary">
+            <table class="table table-striped">
+                <tr class="tablehead">
+                    <td>ID</td>
+                    <td>Start Dest</td>
+                    <td>End Dest</td>
+                    <td>Start Time</td>
+                    <td>Name</td>
+                    <td>ActiveStatus</td>
+                    <td>Estimate Time</td>
+                    <td>Edit</td>
+                    <td>Remove</td>
+                </tr>
+                <tr *ngFor="let route of routeList">
+                    <td>{{route.id}}</td>
+                    <td>{{route.sDest}}</td>
+                    <td>{{route.eDest}}</td>
+                    <td>{{route.sTime}}</td>
+                    <td>{{route.name}}</td>
+                    <td>{{route.activeStatus}}</td>
+                    <td>{{route.eTime}}</td>
+                    <td><input type="button" value="Edit" (click)="putButton(route)" class="btn btn-primary"></td>
+                    <td><input type="button" value="Remove" (click)="deleteRoute(route.id)" class="btn btn-danger"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row" *ngIf="isError" class="errorMessage">
+        ErrorCode : {{errorMessage.errorCode}}
+    </div>
+    <div class="row" *ngIf="isError" class="errorMessage">
+        ErrorDesc : {{errorMessage.errorDesc}}
+    </div>
+</div>
